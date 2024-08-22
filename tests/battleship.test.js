@@ -7,7 +7,7 @@ it('battleship got > 2 HP and gets hit and hp decreases by one', () => {
   expect(ship.hit()).toBe(initialHitPoints-1)
 })
 
-it('battleship got HP == 1 and gets hit resulting by sunk',() => {
+it('battleship got HP == 1 and gets hit resulting by sunk', () => {
   const ship = new Battleship(1)
   expect(ship.hit()).toBe(0)
   expect(ship.sunk).toBe(true)

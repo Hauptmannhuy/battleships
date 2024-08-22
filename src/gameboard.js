@@ -1,7 +1,8 @@
 class Gameboard {
   constructor() {
     this.grid = this.makeGrid()
-
+    this.missedShots = []
+    this.ships = []
   }
 
 
@@ -22,16 +23,34 @@ class Gameboard {
    for (let i = x; i <= dx; i++) {
     this.grid[y][i] = ship
    }
-
    for (let i = y; i <= dy; i++) {
     this.grid[i][x] = ship
    }
+   this.ships.push(ship)
   }
+
+  receiveStrike(coords){
+   let [y,x] = coords
+    if (typeof this.grid[y][x] != 'object'){
+      this.grid[y][x].hit();
+      return 'Ship got hit!'
+    }else {
+      this.missedShots.push([y,x])
+      return 'Missed!'
+    }
+  }
+
+  playerLost(){
+    for (let i = 0; i < this.ships.length; i++) {
+      const ship = this.ships[i];
+      if (ship.sunk == false){
+        return false;
+      }
+    }
+    return true;
+  }
+
   
-  ferchCoordinates(start,end){
-    let x,y = start
-    let processed
-  }
 }
 
 
