@@ -1,3 +1,5 @@
+import Battleship from "./battleship"
+
 class Gameboard {
   constructor() {
     this.grid = this.makeGrid()
@@ -50,7 +52,47 @@ class Gameboard {
     return true;
   }
 
-  
+  randomPlace(){
+    let usedCoords = []
+    let shipsLength = [4,3,2,2]
+    for (let i = 0; i < shipsLength.length; i++) {
+      const n = shipsLength[i];
+      let coords = this.randomCoords(n,usedCoords)
+      let start = coords[0]
+      let end = coords[1]
+      let ship = new Battleship(n)
+      usedCoords.push([start,end])
+      this.placeShip(start,end,ship)
+    }
+  }
+
+  overlap(start,end,coords){
+    let [y1,x1] = start
+    let [y2,x2] = end
+    for (let i = 0; i < coords.length; i++) {
+      let [dy1,dx1] = coords[i][0] // start of existing coordinates
+      let [dy2,dx2] = coords[i][1] // end of existing coordinates
+      const overlapY = Math.max(y1,dy1) <= Math.min(dy2,y2)
+      const overlapX = Math.max(x1,dx1) <= Math.min(dx2,x2)
+      if (overlapX && overlapY){
+        return true
+      }
+    }
+    return false;
+  }
+
+  randomCoords(length,usedCoords){
+  let start = [ Math.floor(Math.random()*9),Math.floor(Math.random()*9)]
+  let end = [ start[0],start[1]+length]
+  if ( this.overlap(start,end, usedCoords) || end[1] > 9){
+   return this.randomCoords(length, usedCoords)
+  } else {
+    return [start,end]
+  }
+
+  }
+
+
 }
 
 
