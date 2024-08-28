@@ -33,7 +33,7 @@ class Gameboard {
 
   receiveStrike(coords){
    let [y,x] = coords
-    if (typeof this.grid[y][x] != 'object'){
+    if (Object.getPrototypeOf(this.grid[y][x]) === Battleship.prototype){
       this.grid[y][x].hit();
       return 'Ship got hit!'
     }else {
