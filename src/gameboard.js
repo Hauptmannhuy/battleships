@@ -82,7 +82,7 @@ class Gameboard {
   }
 
   randomCoords(length,usedCoords){
-  let start = [ Math.floor(Math.random()*9),Math.floor(Math.random()*9)]
+  let start = [ Math.floor(Math.random()*10),Math.floor(Math.random()*10)]
   let end = [ start[0],start[1]+length]
   if ( this.overlap(start,end, usedCoords) || end[1] > 9){
    return this.randomCoords(length, usedCoords)

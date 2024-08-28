@@ -9,10 +9,12 @@ function renderBoard(board, container){
     for (let j = 0; j < col.length; j++) {
       const row = col[j];
       const rowCell = document.createElement('div')
+      rowCell.classList.add('cell')
+      rowCell.setAttribute('coord', `${i} ${j}`)
       if (Object.getPrototypeOf(board[i][j]) === Battleship.prototype) {
-        rowCell.innerHTML = 's'
+        rowCell.innerHTML = `ship [${[i]},${j}]`
       } else {
-        rowCell.innerHTML = '0'
+        rowCell.innerHTML = `[${[i]},${j}]`
       }
       container.append(rowCell)
     }

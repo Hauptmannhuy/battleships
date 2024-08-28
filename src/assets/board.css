@@ -7,6 +7,11 @@
 .board {
 
   display: grid;
-  grid-template-columns: repeat(10,20px);
-  grid-template-rows: repeat(10,20px);
+  grid-template-columns: repeat(10,40px);
+  grid-template-rows: repeat(10,40px);
+}
+
+.cell {
+  border-width: 1px;
+  border-style: solid;
 }
