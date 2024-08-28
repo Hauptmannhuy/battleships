@@ -20,20 +20,7 @@ function renderBoard(board, container){
   }
 }
 
-const cacheStrikeEvent = (board, innerBoard) => {
-  let battleships = board.childNodes
-  for (let i = 0; i < 100; i++) {
-    const ship = battleships[i]
-    ship.addEventListener('click',(e) => {
-          if (moveOrder == false && e.target.parentNode.id == 'player-1' ) {
-            return;
-          } else {
-            let coord = e.target.getAttribute('coord').split(' ').map((n) => n*1)
-            console.log(innerBoard.receiveStrike(coord))
-          }
-        })
-  }
-}
 
 
-export {renderBoard, cacheStrikeEvent};
+
+export {renderBoard};
