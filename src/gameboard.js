@@ -4,6 +4,7 @@ class Gameboard {
   constructor() {
     this.grid = this.makeGrid()
     this.missedShots = []
+    this.hitShots = []
     this.ships = []
   }
 
@@ -35,6 +36,7 @@ class Gameboard {
    let [y,x] = coords
     if (Object.getPrototypeOf(this.grid[y][x]) === Battleship.prototype){
       this.grid[y][x].hit();
+      this.hitShots.push([y,x])
       return 'Ship got hit!'
     }else {
       this.missedShots.push([y,x])

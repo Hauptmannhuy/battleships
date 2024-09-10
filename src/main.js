@@ -1,14 +1,17 @@
 import Battleship from "./battleship";
 import Gameboard from "./gameboard";
 import Player from "./player";
-import { renderBoard } from "./renderBoard";
-import './assets/board.css' 
+import { renderBoard, createBoard } from "./renderBoard";
+import { computerStrike } from './artificialIntelligence'
+import './assets/board.css'
+
 const quickPlayBtn = document.getElementById('quick-play')
 
 let moveOrder = false
 
 const player1Board = document.getElementById('player-1')
 const player2Board = document.getElementById('player-2')
+
 
 
 
@@ -22,7 +25,8 @@ const cacheStrikeEvent = (board, innerBoard) => {
           } else {
             let coord = e.target.getAttribute('coord').split(' ').map((n) => n*1)
             console.log(innerBoard.receiveStrike(coord))
-            moveOrder = moveOrder == moveOrder
+            moveOrder = true
+            renderBoard(innerBoard,player2Board)
           }
         })
   }
@@ -32,22 +36,25 @@ const cacheComputerStrikeEvent = (computerBoard, playerBoard, playerInnerBoard) 
   let computerShips = computerBoard.childNodes
   computerShips.forEach(ship => {
     ship.addEventListener('click',(e)=>{
-     console.log('ai event strike')
-
+      computerStrike(playerInnerBoard)
+      moveOrder = false
+      renderBoard(playerInnerBoard,playerBoard)
     })
   });
 }
 
 
 function quickPlay() {
-  let player = new Player
-  let computer = new Player
-  player.board.randomPlace()
-  computer.board.randomPlace()
-  renderBoard(player.board.grid,player1Board)
-  renderBoard(computer.board.grid,player2Board)
-  cacheStrikeEvent(player2Board,computer.board)
-  cacheComputerStrikeEvent(player2Board,player1Board, player.board)
+  createBoard(player1Board)
+  createBoard(player2Board)
+ let player1 = new Player
+ let player2 = new Player
+  player1.board.randomPlace()
+  player2.board.randomPlace()
+  renderBoard(player1.board,player1Board)
+  renderBoard(player2.board,player2Board)
+  cacheStrikeEvent(player2Board,player2.board)
+  cacheComputerStrikeEvent(player2Board,player1Board, player1.board)
 }
 
 quickPlay()
