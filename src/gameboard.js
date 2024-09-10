@@ -94,6 +94,10 @@ class Gameboard {
 
   }
 
+  excludeLastCoord(array){
+    array.pop()
+  }
+
 
 }
 

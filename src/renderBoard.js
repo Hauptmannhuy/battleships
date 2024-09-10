@@ -10,22 +10,24 @@ function renderBoard(board, container){
 
     for (let j = 0; j < col.length; j++) {
       const node = boardNodes[k]
-      if (renderShot(board.hitShots,[i,j])) {
-        node.innerHTML = 'HIT'
-      } else if (renderShot(board.missedShots,[i,j]))
+      if (renderHit(board.hitShots,[i,j])) {
+        node.setAttribute('style','pointer-events: none;')
+        node.classList.add('hit')
+      } else if (renderHit(board.missedShots,[i,j]))
         {
-        node.innerHTML = 'MISS'
-      } else if (Object.getPrototypeOf(grid[i][j]) === Battleship.prototype) {
-        node.innerHTML = `ship [${[i]},${j}]`
+        node.classList.add('miss')
+        node.setAttribute('style','pointer-events: none;')
+      } else if (Object.getPrototypeOf(grid[i][j]) === Battleship.prototype && container.id == 'player-1') {
+        node.classList.add('ship')
       } else {
-        node.innerHTML = `[${[i]},${j}]`
+        node.classList.add('water')
       }
       k+=1
     }
   }
 }
 
-function renderShot(arr,coord){
+function renderHit(arr,coord){
   for (const arrCoord of arr) {
     if (arrCoord.every((val,i) => val == coord[i]) ) {
       return true
