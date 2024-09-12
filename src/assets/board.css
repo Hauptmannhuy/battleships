@@ -1,4 +1,6 @@
 
+
+
 .game-container {
   display: flex;
   justify-content: space-around;
@@ -32,4 +34,23 @@
 
 .miss {
   background-color: black;
+}
+
+
+.column-designation{
+  display: grid;
+  grid-template-columns: repeat(10,40px);
+  justify-items: center;
+  justify-content: center;
+}
+.row-designation {
+  display: grid;
+  grid-template-rows: repeat(10,40px);
+  justify-items: center;
+  justify-content: center;
+}
+
+.inner-wrapper{
+  display: flex;
+
 }

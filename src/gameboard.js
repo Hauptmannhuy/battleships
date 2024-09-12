@@ -20,6 +20,16 @@ class Gameboard {
     return arr;
   }
 
+   shipRemains(){
+   const remains = {1:0, 2:0, 3:0, 4:0}
+   this.ships.forEach((ship)=> {
+    if (!ship.sunk){
+      remains[ship.length]+=1
+    }
+   })
+   return remains
+  }
+
   placeShip(start, end, ship){
    let [y, x] = start
    let [dy, dx] = end
@@ -56,7 +66,7 @@ class Gameboard {
 
   randomPlace(){
     let usedCoords = []
-    let shipsLength = [4,3,2,2]
+    let shipsLength = [4,3,3,2,2,1,1]
     for (let i = 0; i < shipsLength.length; i++) {
       const n = shipsLength[i];
       let coords = this.randomCoords(n,usedCoords)
@@ -93,11 +103,6 @@ class Gameboard {
   }
 
   }
-
-  excludeLastCoord(array){
-    array.pop()
-  }
-
 
 }
 

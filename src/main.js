@@ -1,13 +1,13 @@
 import Battleship from "./battleship";
 import Gameboard from "./gameboard";
 import Player from "./player";
-import { renderBoard, createBoard } from "./renderBoard";
-import { computerStrike } from './artificialIntelligence'
+import { renderBoard, createBoard, gameOverDeclaration } from "./renderBoard";
+import { gamestate, playerStrike, computerStrike,gameOver } from './gameFLow'
 import './assets/board.css'
 
 const quickPlayBtn = document.getElementById('quick-play')
 
-let moveOrder = false
+
 
 const player1Board = document.getElementById('player-1')
 const player2Board = document.getElementById('player-2')
@@ -20,13 +20,14 @@ const cacheStrikeEvent = (board, innerBoard) => {
   for (let i = 0; i < 100; i++) {
     const ship = battleships[i]
     ship.addEventListener('click',(e) => {
-          if ((moveOrder == false && e.target.parentNode.id == 'player-1') || (moveOrder == true && e.target.parentNode.id == 'player-2') ) {
+          if ((gamestate['moveOrder'] == false && e.target.parentNode.id == 'player-1') || (gamestate['moveOrder'] == true && e.target.parentNode.id == 'player-2') ) {
             return;
           } else {
-            let coord = e.target.getAttribute('coord').split(' ').map((n) => n*1)
-            console.log(innerBoard.receiveStrike(coord))
-            moveOrder = true
+            playerStrike(e.target,innerBoard)
             renderBoard(innerBoard,player2Board)
+            if (gameOver(innerBoard)){
+              gameOverDeclaration()
+            }
           }
         })
   }
@@ -37,7 +38,6 @@ const cacheComputerStrikeEvent = (computerBoard, playerBoard, playerInnerBoard) 
   computerShips.forEach(ship => {
     ship.addEventListener('click',(e)=>{
       computerStrike(playerInnerBoard)
-      moveOrder = false
       renderBoard(playerInnerBoard,playerBoard)
     })
   });
@@ -47,14 +47,14 @@ const cacheComputerStrikeEvent = (computerBoard, playerBoard, playerInnerBoard) 
 function quickPlay() {
   createBoard(player1Board)
   createBoard(player2Board)
- let player1 = new Player
- let player2 = new Player
-  player1.board.randomPlace()
-  player2.board.randomPlace()
-  renderBoard(player1.board,player1Board)
-  renderBoard(player2.board,player2Board)
-  cacheStrikeEvent(player2Board,player2.board)
-  cacheComputerStrikeEvent(player2Board,player1Board, player1.board)
+  gamestate['player1'] = new Player
+  gamestate['player2'] = new Player
+  gamestate['player1'].board.randomPlace()
+  gamestate['player2'].board.randomPlace()
+  renderBoard(gamestate['player1'].board,player1Board)
+  renderBoard(gamestate['player2'].board,player2Board)
+  cacheStrikeEvent(player2Board,gamestate['player2'].board)
+  cacheComputerStrikeEvent(player2Board,player1Board, gamestate['player1'].board)
 }
 
 quickPlay()

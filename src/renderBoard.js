@@ -52,6 +52,9 @@ function createBoard(container){
   }
 }
 
+function gameOverDeclaration(){
+  prompt('game over!')
+}
 
 
-export {renderBoard, createBoard};
+export {renderBoard, createBoard, gameOverDeclaration};
