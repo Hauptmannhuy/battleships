@@ -33,10 +33,10 @@ class Gameboard {
   placeShip(start, end, ship){
    let [y, x] = start
    let [dy, dx] = end
-   for (let i = x; i <= dx; i++) {
+   for (let i = x; i < dx; i++) {
     this.grid[y][i] = ship
    }
-   for (let i = y; i <= dy; i++) {
+   for (let i = y; i < dy; i++) {
     this.grid[i][x] = ship
    }
    this.ships.push(ship)
@@ -66,7 +66,7 @@ class Gameboard {
 
   randomPlace(){
     let usedCoords = []
-    let shipsLength = [4,3,3,2,2,1,1]
+    let shipsLength = [4,3,2,1]
     for (let i = 0; i < shipsLength.length; i++) {
       const n = shipsLength[i];
       let coords = this.randomCoords(n,usedCoords)

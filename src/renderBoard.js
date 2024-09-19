@@ -10,10 +10,16 @@ function renderBoard(board, container){
 
     for (let j = 0; j < col.length; j++) {
       const node = boardNodes[k]
-      if (renderHit(board.hitShots,[i,j])) {
+      if (shipHit(board.hitShots,[i,j])) {
         node.setAttribute('style','pointer-events: none;')
         node.classList.add('hit')
-      } else if (renderHit(board.missedShots,[i,j]))
+        if (grid[i][j].sunk == true && node.children.length < 1){
+          const svg = document.createElement('img')
+          svg.classList.add('cross')
+          svg.src = '/src/assets/img/cross.svg'
+          node.append(svg)
+        }
+      } else if (shipHit(board.missedShots,[i,j]))
         {
         node.classList.add('miss')
         node.setAttribute('style','pointer-events: none;')
@@ -27,7 +33,7 @@ function renderBoard(board, container){
   }
 }
 
-function renderHit(arr,coord){
+function shipHit(arr,coord){
   for (const arrCoord of arr) {
     if (arrCoord.every((val,i) => val == coord[i]) ) {
       return true
@@ -65,16 +71,12 @@ function displaySelector(boardContainer,board, player){
   const shipSelectorTemplate = `
   <h2> Ship selector </h2>
     <div class="length-4-ship">
-      <div class="ship-count"></div>
     </div>
     <div class="length-3-ship">
-      <div class="ship-count"></div>
     </div>
     <div class="length-2-ship">
-      <div class="ship-count"></div>
     </div>
     <div class="length-1-ship">
-      <div class="ship-count"></div>
   </div>
   `
   const arr = ['4','3','2','1']
@@ -82,7 +84,6 @@ function displaySelector(boardContainer,board, player){
   const shipSelector = document.querySelector('.ship-selector')
   for (const n of arr) {
     let table = shipSelector.querySelector(`.length-${n}-ship`)
-    table.children[0].innerHTML = shipHash[n]
     for (let i = 0; i < shipHash[n]; i++){
       const shipDisplayContainer = document.createElement('div')
       for (let i = 0; i < n*1; i++) {

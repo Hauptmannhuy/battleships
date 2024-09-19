@@ -74,7 +74,6 @@ function cacheDraggableShips(){
 
             for (let i = 0; i < shipLength; i++) {
               let incrementedCoordinate = `[coord = "${Number(coords[0])} ${Number(coords[1])+i}"]`
-              console.log(incrementedCoordinate)
               try {
                 let cell = document.querySelector(incrementedCoordinate);
                 unprocessedCoords.push(cell)
@@ -104,15 +103,11 @@ function cacheDraggableShips(){
       document.addEventListener('mouseup', function onMouseUp(mouseUpEvent){
 
       if (dropable){
-        console.log(selectedCoords)
         selectedCoords = selectedCoords.map((domEl) => domEl.getAttribute('coord').split(' '))
-        console.log(typeof selectedCoords)
         const newShip = new Battleship(ship.length)
         const startCoord = selectedCoords.shift().map((el) => Number(el))
         const endCoord = selectedCoords.length > 0 ? selectedCoords.pop().map((el) => Number(el)) : startCoord
-        console.log(startCoord,endCoord)
         gamestate['player1'].board.placeShip(startCoord,endCoord,newShip)
-        console.log(gamestate['player1'].board.grid)
         ship.removeEventListener('mousedown', onMouseDown )
         ship.remove()
       } else {

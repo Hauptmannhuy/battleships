@@ -7,6 +7,7 @@ class Battleship {
   
   hit(){
     this.hitPoints -= 1;
+    console.log(this)
     if (this.hitPoints == 0){
       this.isSunk();
       return 0;
