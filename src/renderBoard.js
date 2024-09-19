@@ -50,11 +50,67 @@ function createBoard(container){
     j = 0
     i+=1
   }
+} 
+
+function createShipSelector() {
+  const ship = document.createElement('div')
+  ship.classList.add('draggable-ship')
+  return ship
 }
+
+
+function displaySelector(boardContainer,board, player){
+  
+  let shipHash = {'4':1,'3':2,'2':2,'1':3}
+  const shipSelectorTemplate = `
+  <h2> Ship selector </h2>
+    <div class="length-4-ship">
+      <div class="ship-count"></div>
+    </div>
+    <div class="length-3-ship">
+      <div class="ship-count"></div>
+    </div>
+    <div class="length-2-ship">
+      <div class="ship-count"></div>
+    </div>
+    <div class="length-1-ship">
+      <div class="ship-count"></div>
+  </div>
+  `
+  const arr = ['4','3','2','1']
+  boardContainer.children[0].innerHTML = shipSelectorTemplate
+  const shipSelector = document.querySelector('.ship-selector')
+  for (const n of arr) {
+    let table = shipSelector.querySelector(`.length-${n}-ship`)
+    table.children[0].innerHTML = shipHash[n]
+    for (let i = 0; i < shipHash[n]; i++){
+      const shipDisplayContainer = document.createElement('div')
+      for (let i = 0; i < n*1; i++) {
+
+        shipDisplayContainer.classList.add('ship-display-container')
+        shipDisplayContainer.style.setProperty("grid-template-columns", `repeat(${n}, 40px)`);
+        const ship = createShipSelector()
+        shipDisplayContainer.append(ship)
+      }
+    table.append(shipDisplayContainer)
+    }
+  }
+  const startBtn = document.createElement('button')
+  startBtn.classList.add('finish-ship-placement')
+  startBtn.innerHTML = 'Start'
+  shipSelector.append(startBtn)
+  
+}
+
+function removeHighlights(array){
+  array.forEach((el) => el.classList.remove('highlight'))
+  return array = []
+}
+
 
 function gameOverDeclaration(){
   prompt('game over!')
 }
 
 
-export {renderBoard, createBoard, gameOverDeclaration};
+export {renderBoard, createBoard, gameOverDeclaration,  displaySelector, removeHighlights};

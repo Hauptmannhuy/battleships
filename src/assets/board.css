@@ -1,5 +1,7 @@
 
-
+/* :root {
+  --column-number:3;
+} */
 
 .game-container {
   display: flex;
@@ -53,4 +55,27 @@
 .inner-wrapper{
   display: flex;
 
+}
+
+
+.draggable-ship{
+  padding: 20px;
+  background-color: grey;
+  border-width: 1px;
+  border-style: solid;
+}
+
+.ship-display-container{
+  display: grid;
+  /* grid-template-columns: repeat(var(--column-number),40px); */
+}
+
+.highlight {
+  background-color: grey;
+}
+
+#player-1-container {
+  display: flex;
+  padding: 20px;
+  gap: 100px;
 }

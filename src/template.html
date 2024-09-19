@@ -6,41 +6,47 @@
   <title>Battleships</title>
 </head>
 <body>
-<!-- <div id="start-menu"> 
+<div class="start-menu"> 
   <button id="quick-play">quick play</button>
   <button id="new-game">new game</button>
-</div> -->
-  <div class="game-container"> 
-    <div class="board-wrapper">
-        <div class="column-designation">
-          <div class="numbers">1</div>
-          <div class="numbers">2</div>
-          <div class="numbers">3</div>
-          <div class="numbers">4</div>
-          <div class="numbers">5</div>
-          <div class="numbers">6</div>
-          <div class="numbers">7</div>
-          <div class="numbers">8</div>
-          <div class="numbers">9</div>
-          <div class="numbers">10</div>
+</div>
+  <div class="game-container hidden">
+<div id="player-1-container">
+  <div class="ship-selector">
+  </div>
+      <div class="board-wrapper">
+          <div class="column-designation">
+            <div class="numbers">1</div>
+            <div class="numbers">2</div>
+            <div class="numbers">3</div>
+            <div class="numbers">4</div>
+            <div class="numbers">5</div>
+            <div class="numbers">6</div>
+            <div class="numbers">7</div>
+            <div class="numbers">8</div>
+            <div class="numbers">9</div>
+            <div class="numbers">10</div>
+          </div>
+        <div class="inner-wrapper">
+          <div class="row-designation">
+              <div class="letters">a</div>
+              <div class="letters">b</div>
+              <div class="letters">c</div>
+              <div class="letters">d</div>
+              <div class="letters">e</div>
+              <div class="letters">f</div>
+              <div class="letters">g</div>
+              <div class="letters">h</div>
+              <div class="letters">i</div>
+              <div class="letters">j</div>
+          </div>
+          <div id="player-1" class="board"></div>
         </div>
-      <div class="inner-wrapper">
-        <div class="row-designation">
-            <div class="letters">a</div>
-            <div class="letters">b</div>
-            <div class="letters">c</div>
-            <div class="letters">d</div>
-            <div class="letters">e</div>
-            <div class="letters">f</div>
-            <div class="letters">g</div>
-            <div class="letters">h</div>
-            <div class="letters">i</div>
-            <div class="letters">j</div>
-        </div>
-        <div id="player-1" class="board"></div>
+        <div class="score-table" id="player-1-score"></div>
       </div>
-      <div class="score-table" id="player-1-score"></div>
-    </div>  
+  
+</div>
+  <div id="player-2-container">
     <div class="board-wrapper">
       <div class="column-designation">
         <div class="numbers">1</div>
@@ -70,6 +76,7 @@
       <div id="player-2" class="board"></div>
     </div>
     <div class="score-table" id="player-2-score"></div>
-  </div>  
+  </div>
+</div>  
 </body>
 </html>
