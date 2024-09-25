@@ -1,26 +1,22 @@
 class Battleship {
   constructor(length) {
-    this.length = length
-    this.hitPoints = length
-    this.sunk = false
+    this.length = length;
+    this.hitPoints = length;
+    this.sunk = false;
   }
-  
-  hit(){
+
+  hit() {
     this.hitPoints -= 1;
-    console.log(this)
-    if (this.hitPoints == 0){
+    if (this.hitPoints == 0) {
       this.isSunk();
       return 0;
     }
-    return this.hitPoints
-  }  
-  
-  isSunk(){
-   return this.sunk = true;
+    return this.hitPoints;
   }
 
-}  
+  isSunk() {
+    return (this.sunk = true);
+  }
+}
 
-
-
-export default Battleship
+export default Battleship;

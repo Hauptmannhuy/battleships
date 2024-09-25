@@ -1,12 +1,9 @@
-import Gameboard from "./gameboard"
+import Gameboard from "./gameboard";
 
 class Player {
   constructor() {
-    this.board = new Gameboard
-
+    this.board = new Gameboard();
   }
 }
 
-export default Player
-
-
+export default Player;
