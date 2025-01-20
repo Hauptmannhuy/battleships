@@ -108,8 +108,12 @@ function removeHighlights(array) {
   return (array = []);
 }
 
-function gameOverDeclaration() {
-  prompt("game over!");
+function gameOverDeclaration(order) {
+  if (order == true) {
+    prompt("Computer lost!")
+  } else {
+    prompt("Player lost!");
+  }
 }
 
 export {

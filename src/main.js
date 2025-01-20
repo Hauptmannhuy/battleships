@@ -7,7 +7,7 @@ import {
   displaySelector,
   removeHighlights,
 } from "./renderBoard";
-import { gamestate, playerStrike, computerStrike, gameOver } from "./gameFLow";
+import { gamestate, playerStrike, computerStrike, gameOver } from "./gameFlow";
 import "./assets/board.css";
 import "./assets/menu.css";
 
@@ -35,7 +35,9 @@ const cacheStrikeEvent = (board, innerBoard) => {
         playerStrike(e.target, innerBoard);
         renderBoard(innerBoard, player2Board);
         if (gameOver(innerBoard)) {
-          gameOverDeclaration();
+          gameOverDeclaration(gamestate["moveOrder"]);
+          gameContainer.classList.add("hidden")
+          startMenu.classList.remove("hidden")
         }
       }
     });
@@ -49,7 +51,7 @@ const cacheComputerStrikeEvent = (
 ) => {
   let computerShips = computerBoard.childNodes;
   computerShips.forEach((ship) => {
-    ship.addEventListener("click", (e) => {
+    ship.addEventListener("click", () => {
       computerStrike(playerInnerBoard);
       renderBoard(playerInnerBoard, playerBoard);
     });
@@ -186,14 +188,14 @@ function newGame() {
   createBoard(player1Board);
   createBoard(player2Board);
   player2BoardContainer.classList.add("hidden");
-  gamestate["player1"] = new Player();
-  gamestate["player2"] = new Player();
+  gamestate["player1"] = new Player('player');
+  gamestate["player2"] = new Player('computer');
   displaySelector(player1BoardContainer, player1Board, gamestate["player1"]);
   cacheDraggableShips();
   cacheGameStartBtn();
 }
 
-quickPlayBtn.addEventListener("click", (event) => {
+quickPlayBtn.addEventListener("click", () => {
   startMenu.classList.add("hidden");
   gameContainer.classList.remove("hidden");
   quickPlay();
